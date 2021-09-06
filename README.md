@@ -1,0 +1,1 @@
+It's mini-framework on PHP This project use dynamic models for add,get and delete rows to DB.

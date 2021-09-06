@@ -1,0 +1,166 @@
+<?php
+require_once("backend/controllers/ProductController.php");
+
+if (isset($_POST["Save"])) {
+    $controller = new ProductController();
+    $controller->add();
+}
+$controller = new ProductController();
+
+$data = $controller->getProducts();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container px-3">
+    <form id="loginform" action="" method="post">
+        <div class="row py-5 mt-3">
+            <h3 class="col-6 justify-content-md-start">Product Add</h3>
+            <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
+                <input name="Save" type="submit" class="btn btn-success">
+                <a href="/" class="btn btn-danger">Cancel</a>
+            </div>
+        </div>
+        <hr>
+        <div class="col-sm-3 mt-3  ">
+            <div class="row ">
+                <div class="col-md-4">
+                    <label for="SKU" class="form-label ">SKU</label>
+                </div>
+                <div class="col-md-8 ">
+                    <input name="sku" type="text" class="form-control" id="sku" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="name" class="form-label">Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input name="name" type="text" class="form-control" id="name"
+                           autocomplete="off">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3 mt-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="price" class="form-label">Price($)</label>
+                </div>
+                <div class="col-md-8">
+                    <input name="price" type="number" class="form-control" id="price"
+                           autocomplete="off">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3 mt-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="productType" class="form-label">Type Switcher</label>
+                </div>
+                <div class="col-md-6">
+                    <select name="product_type_id" class="form-select" id="productType" required="" autocomplete="off">
+                        <?php foreach ($data['products'] as $product) { ?>
+                            <option value="<?= $product->getId(); ?>"><?= $product->getName(); ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div data-product-id="1" id="dvd-input-group">
+            <div class="col-sm-3 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="size" class="form-label">Size</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="size" type="number" max="1000" class="form-control size" id="size"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <br>
+                <h6>Please, provide size</h6>
+            </div>
+        </div>
+        <div data-product-id="2" class="d-none" id="furniture-input-group">
+            <div class="col-sm-3 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="height" class="form-label">Height(CM)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="height" type="number" max="1000" class="form-control size" id="height"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <br>
+                <h6>Please, provide height in cm</h6>
+
+                <br>
+            </div>
+            <div class="col-sm-3 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="size" class="form-label">Width(CM)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="width" type="number" max="1000" class="form-control size" id="width"
+
+                               autocomplete="off">
+                    </div>
+                </div>
+                <br>
+                <h6>Please, provide width in cm</h6>
+
+            </div>
+            <br>
+            <div class="col-sm-3 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="size" class="form-label">Length(CM)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="length" type="number" max="1000" class="form-control size" id="length"
+                        "
+                        autocomplete="off">
+                    </div>
+                </div>
+                <br>
+                <h6>Please, provide length in cm</h6>
+
+            </div>
+
+        </div>
+        <div data-product-id="3" class="d-none" id="book-input-group">
+            <div class="col-sm-3 ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="size" class="form-label">Weight(KG)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input name="weight" type="number" max="1000" class="form-control size" id="book"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <br>
+                <h6>Please, provide weight in kg</h6>
+            </div>
+        </div>
+        <hr>
+    </form>
+</div>
+<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="node_modules/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+<script src="script.js"></script>
+</body>
+</html>
