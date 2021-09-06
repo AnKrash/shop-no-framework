@@ -1,6 +1,6 @@
 $("#productType").on('input', function () {
     $('div[data-product-id]').addClass("d-none");
-    $('[data-product-id='+$(this).find(":selected").val() +']').removeClass("d-none");
+    $('[data-product-id=' + $(this).find(":selected").val() + ']').removeClass("d-none");
 });
 
 $(document).ready(function () {

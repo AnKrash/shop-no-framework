@@ -24,4 +24,5 @@ create table products
 alter table products
     add constraint products_product_types__fk
         foreign key (product_type_id) references product_types (id);
-insert into product_type_fields (product_type_id, field_name, field_type) VALUES (3,'weight','number')
+
+insert into product_types (id, name) VALUES (1,'DVD'),(2,'Furniture'),(3,'Book');
