@@ -26,4 +26,4 @@ How to install project:
 -git clone [git@github.com:AnKrash/shop-no-framework.git]
 3.npm settings:
 -npm install
- 
+4.Configure the settings corresponding to your database in the "Database.php"

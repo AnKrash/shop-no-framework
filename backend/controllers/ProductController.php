@@ -17,7 +17,8 @@ class ProductController
         $productType = Database::getConnection()->query('SELECT * FROM product_types where id =' . $_POST['product_type_id'])->fetchObject(ProductType::class);
 
         try {
-            $product = new ($productType->getName())();
+            $productType = $productType->getName();
+            $product = new $productType();
         } catch (Exception $ex) {
             echo "wrong product type provided";
             return;
@@ -47,12 +48,12 @@ class ProductController
 
         $stmt->execute();
 
-        header('Location: /', true, 303);
+        header('Location: /', true, 302);
     }
 
     public function index(): array
     {
-        $products = Database::getConnection()->query('SELECT *, pt.name as product_type FROM products INNER JOIN product_types pt on products.product_type_id = pt.id')->fetchAll();
+        $products = Database::getConnection()->query('SELECT products.*, pt.name as product_type FROM products INNER JOIN product_types pt on products.product_type_id = pt.id')->fetchAll();
 
         $resultArray = [];
 
@@ -82,10 +83,7 @@ class ProductController
 
         $sql = sprintf("DELETE FROM products WHERE id IN (%s)", implode(',', $ids));
         $stmt = Database::getConnection()->prepare($sql);
-        $stmt->bindValue('ids', $ids);
 
         $stmt->execute();
-
-        header("HTTP/1.1 200 OK");
     }
 }

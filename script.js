@@ -1,10 +1,10 @@
-$("#productType").on('input', function () {
-    $('div[data-product-id]').addClass("d-none");
-    $('[data-product-id=' + $(this).find(":selected").val() + ']').removeClass("d-none");
-});
+$(function () {
+    $("#productType").on('change', function () {
+        $('div[data-product-id]').addClass("d-none");
+        $('[data-product-id=' + $(this).find(":selected").val() + ']').removeClass("d-none");
+    });
 
-$(document).ready(function () {
-    $("#loginform").validate({
+    $("#product_form").validate({
         rules: {
             sku: {
                 required: true,
@@ -70,24 +70,22 @@ $(document).ready(function () {
             },
         }
     });
-});
 
-$("#delete-product-btn").on("click", function () {
-    let data = [];
-    $("input:checkbox:checked").each(function () {
-        data.push($(this).attr('value'));
-        console.log($(this).attr('value'));
+    $("#delete-product-btn").on("click", function () {
+        let data = [];
+        $("input:checkbox:checked").each(function () {
+            data.push($(this).attr('value'));
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/ajax.php",
+            data: {ids: JSON.stringify(data)},
+        }).done(function () {
+            $("input:checkbox:checked").closest('.card').remove();
+        });
     });
 
-    $.ajax({
-        type: "POST",
-        url: "/ajax.php",
-        data: {ids: JSON.stringify(data)},
-    }).done(function () {
-        $("input:checkbox:checked").closest('.card').remove();
-    });
-});
-$(function () {
     $('.multiple-items').slick({
         infinite: true,
         slidesToShow: 4,
