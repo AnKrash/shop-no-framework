@@ -1,3 +1,5 @@
+Test site: https://shop-demo-project.000webhostapp.com/
+
 It's a mini-framework on PHP.
 This project use dynamic models for adding,getting and deleting rows in the DB.
 Allows flexible editing of the database, using product classes.
